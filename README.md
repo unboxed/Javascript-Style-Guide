@@ -322,7 +322,8 @@ Of course, drop-in code like google analytics is also acceptable.
 
 Use of javascript in html attributes is bad:
 
-`Do Something` 
+    &lt;a onclick="do_something();"&gt;Do Something&lt;/a&gt;
+
 ## Language rules
 
 ### Var
@@ -333,10 +334,12 @@ If you wish something to be declared on window, be explicit:
 
 wrong:
 
-`foo = 'bar';` 
+    foo = 'bar';
+
 right:
 
-`window.foo = 'bar';` 
+    window.foo = 'bar';
+
 ### Constants
 
 Constants should be defined as normal variables but should obey the naming
