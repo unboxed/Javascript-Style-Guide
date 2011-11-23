@@ -145,13 +145,13 @@ spaces, just like blocks.
 Note that values are aligned with no space between the key and the colon.
 
     this.rows_ = [
-        '"Slartibartfast" ',
-        '"Zaphod Beeblebrox" ',
-        '"Ford Prefect" ',
-        '"Arthur Dent" ',
-        '"Marvin the Paranoid Android" ',
-        'the.mice@magrathea.com'
-      ];
+      '"Slartibartfast" ',
+      '"Zaphod Beeblebrox" ',
+      '"Ford Prefect" ',
+      '"Arthur Dent" ',
+      '"Marvin the Paranoid Android" ',
+      'the.mice@magrathea.com'
+    ];
 
 #### Function Calls
 
