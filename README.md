@@ -155,7 +155,7 @@ var inset = {
 Note that values are aligned with no space between the key and the colon.
 
 ```javascript
-this.rows_ = [
+this.rows = [
   '"Slartibartfast" ',
   '"Zaphod Beeblebrox" ',
   '"Ford Prefect" ',
