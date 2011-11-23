@@ -72,7 +72,7 @@ object attribute is anonymous unless explicitly given a name:
 bad:
 
 ```javascript
-this.do_the_macarana = function () {
+this.do_the_macarena = function () {
   //...
 }
 ```
@@ -83,7 +83,7 @@ anonymous.
 good:
 
 ```javascript
-this.do_the_macarana = function do_the_macarana() {
+this.do_the_macarena = function do_the_macarena() {
   //...
 }
 ```
@@ -278,11 +278,11 @@ from the function name.
 Bad:
 
 ```javascript
-function do_the_macarana(tempo, start_at_step, repeats) {
+function do_the_macarena(tempo, start_at_step, repeats) {
   //...
 }
 
-do_the_macarana(120, 5, 3);
+do_the_macarena(120, 5, 3);
 ```
 
 Here, it's not obvious reading the function call what the parameters are 
@@ -292,11 +292,11 @@ definition to understand the code.
 Good:
 
 ```javascript
-function do_the_macarana(params) {
+function do_the_macarena(params) {
     //params: tempo, start_at_step, repeats
   }
 
-  do_the_macarana({
+  do_the_macarena({
     tempo:         120,
     start_at_step: 5,
     repeats:       3
@@ -306,13 +306,13 @@ function do_the_macarana(params) {
 or
 
 ```javascript
-function do_the_macarana(params) {
+function do_the_macarena(params) {
   var tempo =         params.tempo;
   var start_at_step = params.start_at_step;
   var repeats =       params.repeats;
 }
 
-do_the_macarana({
+do_the_macarena({
   tempo: 120,
   start_at_step: 5,
   repeats: 3
