@@ -325,6 +325,8 @@ Use of javascript in html attributes is bad:
 
     <a onclick="do_something();">Do Something</a>;
 
+Make use of [unobtrusive javascript](http://en.wikipedia.org/wiki/Unobtrusive_JavaScript "Unobtrusive JavaScript on Wikipedia") in order to separate the functionality (the "behaviour layer") from a Web page's structure/content and presentation.
+
 ## Language rules
 
 ### Var
