@@ -157,7 +157,8 @@ Note that values are aligned with no space between the key and the colon.
 
 Simple functions calls should all be on one line:
 
-`activate(the_laser, '100000V');` 
+    activate(the_laser, '100000V');
+
 Function calls with extremely long arguments or lots of them should be 
 split into 1 line per argument, starting on the second line:
 
@@ -537,7 +538,7 @@ This method should not be used to iterate over an array.
 
 for example:
 
-    Array.prototype.find = function () {....}` 
+    Array.prototype.find = function () {....} 
 
 Native wrapped constructors should never be modified. If you need to 
 extend the functionality of a native type, create a new constructor which
