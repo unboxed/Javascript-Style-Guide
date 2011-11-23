@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Javascript Style Guide - Unboxed Consulting</title>
+  <style type="text/css">
+    html {
+      background-color: #ccc;
+    }
+    body {
+      font-family: helvetica, arial;
+      color: #555;
+      max-width: 700px;
+      line-height: 1.4em;
+      font-size: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: white;
+      padding: 20px;
+    }
+    h2 { margin-top: 50px; }
+    h3 { margin-top: 50px; border-bottom: solid 1px #999; text-indent: 3px; }
+    h4 { margin-top: 30px;  }
+    
+    .code {
+      background-color: #eee;
+      color: #333;
+      font-family: monospace;
+      color: #0000cc;
+      display: inline-block;
+      padding: 0 5px;
+    }
+    div.code {
+      display: block;
+      white-space: pre;
+      padding: 0 7px;
+    }
+    .good {
+      background-color: #d8f6dd;
+    }
+    .bad {
+      background-color: #fdd;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Javascript style guide - Unboxed Consulting</h1>
+  <p>First Draft</p>
+  
+  <h2>Preamble</h2>
+  
+  <p>
+    This is intended as a set of guidelines only. &nbsp;It is not intended to be a book of absolute rules 
+    and consistency with any existing code base should always be held as more important that this document.
+  </p>
+  <p>
+    It is also intended to be a living document and should be continuously updated where experience shows
+    it to be incorrect.
+  </p>
+  
+  <h2>TLDR;</h2>
+  
+  <ul>
+    <li>FullCamel case for namespaces and constructors.</li>
+    <lI>lowercase_underscored for variables and functions.</lI>
+    <li>UPPERCASE_UNDERSCORED for constants.</li>
+    <li>Name verbosely, try to make function names explain what the function does.</li>
+    <li>2 Spaces for indentation.</li>
+    <li>Use the constructor pattern.</li>
+    <li>Use named parameters where parameter meaning is not implicit in function calls.</li>
+    <li>Use '<span class="code">self</span>' for holding construction object in closure.</li>
+    <li>Use exceptions. Never code to fail silently.</li>
+  </ul>
+
+
+  <h2>House Style</h2>
+
+  <h3>Naming conventions</h3>
+     
+  <h4>Cases</h4>
+  <table>
+    <tbody>
+      <tr>
+        <td>Namespaces</td>
+        <td>FullCamel</td>
+        <td>UbxdWeb</td>
+      </tr>
+      <tr>
+        <td>Constructors</td>
+        <td>FullCamel</td>
+        <td>UbxdWeb.Carousel</td>
+      </tr>
+      <tr>
+        <td>Variables</td>
+        <td>lowercase_underscored</td>
+        <td>price_of_cheese</td>
+      </tr>
+      <tr>
+        <td>Functions</td>
+        <td>lowercase_underscored</td>
+        <td>get_price_of_cheese()</td>
+      </tr>
+      <tr>
+        <td>Constants</td>
+        <td>UPPERCASE_UNDERSCORED</td>
+        <td>KG_PER_POUND</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <p>
+    Given we are predominately a ruby house, these have been chosen to reflect the ruby conventions.
+  </p>
+  
+  <h4>Functions</h4>
+  
+  <p>Avoid using anonymous functions. Note that a function assigned to an object attribute is anonymous unless explicitly given a name:</p>
+
+  <p>bad:</p>
+  <div class="code bad">this.do_the_macarana = function () {
+  //...
+}</div>
+  <p>Although assigned to a meaningful attribute, this function itself is anonymous.</p>
+  
+  <p>good:</p>
+  <div class="code good">this.do_the_macarana = function do_the_macarana() {
+  //...
+}</div>
+  
+  <p>
+    An application made up of entirely anonymous functions is almost impossible to effectively profile, and stack traces end up being pretty meaningless.
+  </p>
+  <p>
+    Some small functions passed as arguments (maybe as callbacks or event handlers) may not really have a suitable name, in which case leaving them anonymous is appropriate.
+  </p>
+  
+  <h4>More about naming</h4>
+  
+  <p>Function naming is extremely important.  Descriptive function names can really make the difference between readable and unreadable code.  Be verbose.  Having really long function or variable names is not a problem; Javascript can be minified.</p>
+  
+  
+  <h4>Commenting</h4>
+
+  <p>Feel free to comment anything obscure, but there is no need to comment the obvious.</p>
+
+  <p>If you find yourself needing to comment a lot, consider breaking the code up into named functions which serve to describe what the code is doing.</p>
+
+  <p>If working on a previously commented piece of code, be sure to change the comments to ensure they are still accurate.</p>
+  
+  
+  
+  <h3>Code Formatting</h3>
+  
+  <h4>Curly Braces</h4>
+  
+  <p>Because of implicit semicolon insertion, always start your curly braces on the same line as whatever they're opening. For example:</p>
+  
+  <div class="code good">if (something) {
+  // ...
+} 
+else {
+  // ...
+}</div>
+  
+  <h4>Array and Object Initializers</h4>
+  
+  <p>Single-line array and object initializers are allowed when they fit on a line:</p>
+  <div class="code good">var arr = [1, 2, 3];  // No space after [ or before ].
+var obj = {a: 1, b: 2, c: 3};  // No space after { or before }.</div>
+
+  <p>Multiline array initializers and object initializers are indented 2 spaces, just like blocks.</p>
+  <div class="code good">var inset = {
+  top:    10,
+  right:  20,
+  bottom: 15,
+  left:   12
+};</div>
+  <p>Note that values are aligned with no space between the key and the colon.</p>
+
+  <div class="code good">
+  this.rows_ = [
+    '"Slartibartfast" &lt;fjordmaster@magrathea.com&gt;',
+    '"Zaphod Beeblebrox" &lt;theprez@universe.gov&gt;',
+    '"Ford Prefect" &lt;ford@theguide.com&gt;',
+    '"Arthur Dent" &lt;has.no.tea@gmail.com&gt;',
+    '"Marvin the Paranoid Android" &lt;marv@googlemail.com&gt;',
+    'the.mice@magrathea.com'
+  ];
+  </div>
+  
+  
+  <h4>Function Calls</h4>
+  
+  <p>Simple functions calls should all be on one line:</p>
+
+  <div class="code good">activate(the_laser, '100000V');</div>
+  
+  <p>Function calls with extremely long arguments or lots of them should be split into 1 line per argument, starting on the second line:</p>
+
+  <div class="code good">activate(
+  the_super_multi_laser_array,
+  '100000000000000000000000000000000000000000V'
+);</div>
+
+  <p>Additionally, if the arguments contain an object (hashlike), it should always be written multiline:</p>
+  
+  <div class="code good">activate(
+  the_super_multi_laser_array,
+  settings: {
+    voltage: 100000000000000000000000000,
+    target:  "John Prescot's bald spot"
+  }
+);</div>
+  
+  <h4>Indentation</h4>
+
+  <p>Use 2 spaces for indentation.</p>
+  
+  
+  <h3>Constructors</h3>
+  
+  <p>There are several different ways of constructing objects.  In general the constructor pattern is recommended:</p>
+  
+  <div class="code good">function Laser() {
+  this.fire = function fire() {
+    //...
+  }
+}
+
+window.the_laser = new Laser();</div>
+  
+  <p>Nested constructors are also fine but try to keep stuff separate where possible.</p>
+  
+  <div class="code good">function Laser() {
+  var power_supply = new PowerSupply();
+
+  this.fire = function fire() {
+    power_supply.turn_on();
+    //...
+  }
+
+  function PowerSupply() {
+    //...
+  }
+}</div>
+  
+  <h3>Modular Behavior</h3>
+  
+  <p>Common behaviour can be bundled into modules:</p>
+  
+  <div class="code good">function PoweredThing() {
+  this.set_voltage = function set_voltage() {
+    //...
+  }
+}
+
+function Laser() {
+  PoweredThing.apply(this);
+}
+
+var laser = new Laser();
+
+laser.set_voltage(100000000);</div>
+  
+  <h3>Self</h3>
+  
+  <p>Often, it's required to hold the constructed object in closure for use by private functions.  Use the variable name self for this:</p>
+
+  <div class="code good">function Laser() {
+  var self = this;  
+
+  function fire() {
+    set_voltage(self.voltage);
+  }
+}</div>
+
+  <p>Note that this should always be the first line of the constructor.</p>
+  
+  
+  <h3>Using named parameters</h3>
+  
+  <p>Using named parameters reduces connescence and makes code more readable. It is encouraged when a function's parameters are not immediately obvious from the function name.</p>
+
+
+  <p>Bad:</p>
+  <div class="code bad">funciton do_the_macarana(tempo, start_at_step, repeats) {
+  //...
+}
+
+do_the_macarana(120, 5, 3);</div>
+  <p>Here, it's not obvious reading the function call what the parameters are doing and anyone looking at the code would have to look up the function definition to understand the code.</p>
+
+  <p>Good:</p>
+  <div class="code good">function do_the_macarana(params) {
+    //params: tempo, start_at_step, repeats
+  }
+
+  do_the_macarana({
+    tempo:         120,
+    start_at_step: 5,
+    repeats:       3
+  });</div>
+
+  <p>or</p>
+
+  <div class="code good">function do_the_macarana(params) {
+  var tempo =         params.tempo;
+  var start_at_step = params.start_at_step;
+  var repeats =       params.repeats;
+}
+
+do_the_macarana({
+  tempo: 120,
+  start_at_step: 5,
+  repeats: 3
+});</div>
+  <p>Here, it's immediately apparent what the purpose of each parameter is when reading the function call.</p>
+  <p>Which parameters are consumed should be immediately visible at the start of the function definition.  When defining a function, either var all the members of params which you are interested in using, or leave a comment saying which params are being used.</p>
+  
+  <h2>Code Layout</h2>
+  
+  <h3>Files</h3>
+  
+  <p>In general, one file should be created for each constructor.  All files should be named in lower_underscored case and should reflect the constructor.</p>
+  
+  <p>Vendor stuff (jQuery, CKEditor, etc.) should be in the /vendor folder</p>
+  
+  <p>Lib stuff (Utilities, any other non-vendor libraries which are not specific to a single part of the application) should be in the /lib folder.</p>
+  
+  <p>application.rb should only include code to initialize the application.</p>
+  
+  
+  <h3>Code in views</h3>
+  
+  <p>It is acceptable to have inline javascript code, but only initializers related to the page content.  In general, wherever possible, javascript code should be kept out of the view.</p>
+
+  <p>It's acceptable to set any required application constants inline.</p>
+
+  <p>Of course, drop-in code like google analytics is also acceptable.</p>
+
+  <p>Use of javascript in html attributes is bad:</p>
+  <div class="code bad">&lt;a onclick="do_something();"&gt;Do Something&lt;/a&gt;</div>
+  
+  <h2>Language rules</h2>
+  
+  <h3>Var</h3>
+  
+  <p>Always use <span class="code">var</span>. Never use implicit assignment.</p>
+
+  <p>If you wish something to be declared on window, be explicit:</p>
+
+  <p>wrong:</p>
+  <div class="code bad">foo = 'bar';</div>
+
+  <p>right:</p>
+  <div class="code good">window.foo = 'bar';</div>
+  
+  <h3>Constants</h3>
+  
+  <p>Constants should be defined as normal variables but should obey the naming conventions for constants.  The <span class="code">const</span> keyword is not well supported and thus should not be used.</p>
+  
+  
+  <h3>Semicolons</h3>
+
+  <p>Never rely on inferred insertion of semicolons.  Semicolons are required after all assignments or function calls.  Semicolons are not required after blocks.</p>
+
+  <p>It's also recommended to use semicolon after function declarations even though they are not required.</p>
+
+  <p>Semicolons should not be used after <span class="code">for</span> / <span class="code">while</span> / <span class="code">switch</span> / <span class="code">if</span> / <span class="code">else</span> blocks and other similar constructions for readability.</p>
+
+  <div class="code">var foo = 'bar';
+// assignment - needs a semicolon.
+
+function foo() {
+  alert("don't you foo me");
+  //function call, needs a semicolon.
+};
+// Doesn't need a semicolon, but should have one.
+
+this.foo = function foo() {
+  alert("don't you foo me");
+};
+// This must have a semicolon as it is an assignment.
+
+if (foo) {
+  foo();
+}
+// Should not have a semicolon.</div>
+  
+  
+  <h3>Nested Functions</h3>
+  
+  <p>Nested functions are a great way to break up a function and can be used liberally.  If a function is used exclusively by another function, it should in general be declared within that function.</p>
+  
+  <p>Bad:</p>
+  <div class="code bad">function foo_plus_bar() {
+  return get_foo_for_foo_plus_bar() + 'bar';
+};
+function get_foo_for_foo_plus_bar() {
+  return 'foo';
+};</div>
+  
+  <p>Good:</p>
+  <div class="code good">function foo_plus_bar() {
+  function get_foo() {
+    return 'foo';
+  };
+
+  return get_foo() + 'bar';
+};</div>
+  
+  <p>As an exception to this, sometimes you may have to declare a 'child' function outside of the main function to avoid a circular reference (see section on closures).</p>
+  
+  
+  <h3>Declarations within blocks</h3>
+  
+  <p>In general, avoid making any declarations within blocks.  Especially, absolutely do not define functions within blocks as this is not part of ECMAScript.  ECMAScript only allows for Function Declarations in the root statement list of a script or function.</p>
+  
+  <p class="Bad:">Terrible:</p>
+  
+  <div class="code bad">if (foo_is_wibble) {
+  function foo() { return 'wibble'; }
+}
+else {
+  function foo() { return 'bar'; }
+}
+foo();</div>
+  
+  <p>Ok:</p>
+  <div class="code good">funciton wibble() {
+  return 'wibble';
+}
+function bar() {
+  return 'bar';
+}
+
+var foo;
+if (foo_is_wibble) {
+  foo = wibble;
+}
+else {
+  foo = bar;
+}
+foo();</div>
+
+  <p>In general, variables should also not be declared in blocks:</p>
+  
+  <p>bad:</p>
+  <div class="code bad">for (var i=0; i&lt;5 i++) {
+  var wibble = new Wibble(i);
+  wibbles.push(bar);
+}</div>
+  
+  <p>good:</p>
+  <div class="code good">var wibble;
+for (var i=0; i&lt;5 i++) {
+  wibble = new Wibble(i);
+  wibbles.push(wibble);
+}</div>
+  
+  <h3>Exceptions</h3>
+
+  <p>Use exceptions.  Throw stuff whenever you need to.  The only thing to avoid is using try / catch blocks for 'happy path' execution.  Try / catch blocks are expensive and should only be used for exception handling.</p>
+
+  <p>Don't be afraid of throwing custom exceptions.  If something is broken, it's broken and a good error message will save time in debugger.  Never code to fail silently.</p>
+  
+  
+  <h3>Creating primitive objects</h3>
+
+  <p>Do not use wrapper objects.  Just declare the primitive directly:</p>
+
+  <div class="code good">var str = 'foo';
+var bool = false;
+var arr = [];
+var num = 10;
+var obj = {};</div>
+  
+  <p>Especially, never use the <span class="code">new</span> keyword with primitive constructors. Here's why:</p>
+
+  <div class="code">typeof(Boolean()) //==> 'boolean'
+
+typeof(new Boolean()) //==> 'object'</div>
+
+  <p>There are only five primitive types in javascript, these are</p>
+  <p class="code">undefined, null, boolean, number, and string</p>
+  
+  
+  <h3>Closures</h3>
+
+  <p>Closures are great.  Closures can inspire genuine awe.  However, consideration must sometimes be taken in their use, especially in long-running code.</p>
+
+  <p>Consider this:</p>
+
+  <div class="code">function foo(element, a, b) {
+  element.onclick = function handle_click() { /* uses a and b */ };
+}</div>
+
+  <p>Here, we have created a circular reference which will cause a memory leak.  The function <span class="code">handle_click</span> holds <span class="code">element</span> in scope, and <span class="code">element</span> holds <span class="code">handle_click</span>, meaning that neither can be destroyed.</p>
+  
+  <div class="code good">function foo(element, a, b) {
+  element.onclick = bar(a, b);
+}
+
+function bar(a, b) {
+  return function() { /* uses a and b */ }
+}</div>
+
+  <p>Here a second closure not containing <span class="code">element</span> is created, thus avoiding the circular reference.</p>
+  
+  <h3>Eval</h3>
+
+  <p>In general, the only use for <span class="code">eval</span> is to deserialize stuff.  If you find yourself trying to use it for anything else, you're probably being too 'meta'.</p>
+  
+  
+  <h3>With</h3>
+
+  <p>In general, just don't.  Use of the with keyword can easily mask scope and produce extremely confusing code to read.</p>
+  
+  
+  <h3>This</h3>
+
+  <p>Use of '<span class="code">this</span>' can be confusing.  In general it should be limited to being used within constructors and in conjunction with <span class="code">call</span> or <span class="code">apply</span>.</p>
+  <p>Using <span class="code">this</span> to target dom elements in event calls generally hints at a bad code structure, and consideration should be given to how to achieve the same results in a different way.</p>
+  
+  
+  <h3>For &hellip; in &hellip; loops</h3>
+
+  <p>This method should not be used to iterate over an array.</p>
+  
+  
+  <h3>Modifying prototypes of builtin objects</h3>
+
+  <p>for example:</p>
+
+  <div class="code bad">Array.prototype.find = function () {....}</div>
+
+  <p>Native wrapped constructors should never be modified.  If you need to extend the functionality of a native type, create a new constructor which creates an object and then attaches any extended stuff to it.</p>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
