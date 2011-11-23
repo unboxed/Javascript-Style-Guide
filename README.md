@@ -448,12 +448,18 @@ In general, variables should also not be declared in blocks:
 
 bad:
 
-    for (var i=0; i
+    for (var i=0; i<5 i++) {
+      var wibble = new Wibble(i);
+      wibbles.push(bar);
+    }
 
 good:
 
     var wibble;
-    for (var i=0; i
+    for (var i=0; i<5 i++) {
+      wibble = new Wibble(i);
+      wibbles.push(wibble);
+    }
 
 ### Exceptions
 
