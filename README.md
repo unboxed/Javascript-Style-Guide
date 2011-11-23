@@ -31,35 +31,35 @@ updated where experience shows it to be incorrect.
 
 #### Cases
 
-Namespaces
-
-FullCamel
-
-UbxdWeb
-
-Constructors
-
-FullCamel
-
-UbxdWeb.Carousel
-
-Variables
-
-lowercase_underscored
-
-price\_of\_cheese
-
-Functions
-
-lowercase_underscored
-
-get\_price\_of_cheese()
-
-Constants
-
-UPPERCASE_UNDERSCORED
-
-KG\_PER\_POUND
+<table>
+  <tbody>
+    <tr>
+      <td>Namespaces</td>
+      <td>FullCamel</td>
+      <td>UbxdWeb</td>
+    </tr>
+    <tr>
+      <td>Constructors</td>
+      <td>FullCamel</td>
+      <td>UbxdWeb.Carousel</td>
+    </tr>
+    <tr>
+      <td>Variables</td>
+      <td>lowercase_underscored</td>
+      <td>price_of_cheese</td>
+    </tr>
+    <tr>
+      <td>Functions</td>
+      <td>lowercase_underscored</td>
+      <td>get_price_of_cheese()</td>
+    </tr>
+    <tr>
+      <td>Constants</td>
+      <td>UPPERCASE_UNDERSCORED</td>
+      <td>KG_PER_POUND</td>
+    </tr>
+  </tbody>
+</table>
 
 Given we are predominately a ruby house, these have been chosen to reflect
 the ruby conventions. 
