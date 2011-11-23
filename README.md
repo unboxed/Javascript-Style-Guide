@@ -155,7 +155,7 @@ Note that values are aligned with no space between the key and the colon.
 
 #### Function Calls
 
-Simple functions calls should all be on one line:
+Simple function calls should all be on one line:
 
     activate(the_laser, '100000V');
 
@@ -211,7 +211,7 @@ possible.
       }
     }
 
-### Modular Behavior
+### Modular Behaviour
 
 Common behaviour can be bundled into modules:
 
@@ -534,7 +534,7 @@ same results in a different way.
 
 This method should not be used to iterate over an array.
 
-### Modifying prototypes of builtin objects
+### Modifying prototypes of built-in objects
 
 for example:
 
