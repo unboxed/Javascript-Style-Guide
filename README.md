@@ -322,7 +322,7 @@ Of course, drop-in code like google analytics is also acceptable.
 
 Use of javascript in html attributes is bad:
 
-    &lt;a onclick="do_something();"&gt;Do Something&lt;/a&gt;
+    <a onclick="do_something();">Do Something</a>;
 
 ## Language rules
 
@@ -475,8 +475,8 @@ Do not use wrapper objects. Just declare the primitive directly:
 Especially, never use the new keyword with primitive constructors. Here's
 why:
 
-    typeof(Boolean()) //==&gt; 'boolean'
-    typeof(new Boolean()) //==&gt; 'object'
+    typeof(Boolean()) //==> 'boolean'
+    typeof(new Boolean()) //==> 'object'
 
 There are only five primitive types in javascript, these are
 
