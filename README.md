@@ -71,18 +71,22 @@ object attribute is anonymous unless explicitly given a name:
 
 bad:
 
-    this.do_the_macarana = function () {
-      //...
-    }
+```javascript
+this.do_the_macarana = function () {
+  //...
+}
+```
 
 Although assigned to a meaningful attribute, this function itself is 
 anonymous.
 
 good:
 
-    this.do_the_macarana = function do_the_macarana() {
-      //...
-    }
+```javascript
+this.do_the_macarana = function do_the_macarana() {
+  //...
+}
+```
 
 An application made up of entirely anonymous functions is almost 
 impossible to effectively profile, and stack traces end up being pretty 
@@ -117,66 +121,80 @@ comments to ensure they are still accurate.
 Because of implicit semicolon insertion, always start your curly braces on
 the same line as whatever they're opening. For example:
 
-    if (something) {
-      // ...
-    }
-    else {
-      // ...
-    }
+```javascript
+if (something) {
+  // ...
+}
+else {
+  // ...
+}
+```
 
 #### Array and Object Initializers
 
 Single-line array and object initializers are allowed when they fit on a 
 line:
 
-    var arr = [1, 2, 3];  // No space after [ or before ].
-    var obj = {a: 1, b: 2, c: 3};  // No space after { or before }.
+```javascript
+var arr = [1, 2, 3];  // No space after [ or before ].
+var obj = {a: 1, b: 2, c: 3};  // No space after { or before }.
+```
 
 Multiline array initializers and object initializers are indented 2 
 spaces, just like blocks.
 
-    var inset = {
-      top:    10,
-      right:  20,
-      bottom: 15,
-      left:   12
-    };
+```javascript
+var inset = {
+  top:    10,
+  right:  20,
+  bottom: 15,
+  left:   12
+};
+```
 
 Note that values are aligned with no space between the key and the colon.
 
-    this.rows_ = [
-      '"Slartibartfast" ',
-      '"Zaphod Beeblebrox" ',
-      '"Ford Prefect" ',
-      '"Arthur Dent" ',
-      '"Marvin the Paranoid Android" ',
-      'the.mice@magrathea.com'
-    ];
+```javascript
+this.rows_ = [
+  '"Slartibartfast" ',
+  '"Zaphod Beeblebrox" ',
+  '"Ford Prefect" ',
+  '"Arthur Dent" ',
+  '"Marvin the Paranoid Android" ',
+  'the.mice@magrathea.com'
+];
+```
 
 #### Function Calls
 
 Simple function calls should all be on one line:
 
-    activate(the_laser, '100000V');
+```javascript
+activate(the_laser, '100000V');
+```
 
 Function calls with extremely long arguments or lots of them should be 
 split into 1 line per argument, starting on the second line:
 
-    activate(
-      the_super_multi_laser_array,
-      '100000000000000000000000000000000000000000V'
-    );
+```javascript
+activate(
+  the_super_multi_laser_array,
+  '100000000000000000000000000000000000000000V'
+);
+```
 
 Additionally, if the arguments contain an object (hashlike), it should 
 always be written multiline:
 
-    activate(
-      the_super_multi_laser_array,
-      settings: {
-        voltage: 100000000000000000000000000,
-        target:  "John Prescot's bald spot"
-      }
-    );
+```javascript
+activate(
+  the_super_multi_laser_array,
+  settings: {
+    voltage: 100000000000000000000000000,
+    target:  "John Prescot's bald spot"
+  }
+);
+```
 
 #### Indentation
 
@@ -187,59 +205,67 @@ Use 2 spaces for indentation.
 There are several different ways of constructing objects. In general the 
 constructor pattern is recommended:
 
-    function Laser() {
-      this.fire = function fire() {
-        //...
-      }
-    }
-    
-    window.the_laser = new Laser();
+```javascript
+function Laser() {
+  this.fire = function fire() {
+    //...
+  }
+}
+
+window.the_laser = new Laser();
+```
 
 Nested constructors are also fine but try to keep stuff separate where 
 possible.
 
-    function Laser() {
-      var power_supply = new PowerSupply();
-    
-      this.fire = function fire() {
-        power_supply.turn_on();
-        //...
-      }
-    
-      function PowerSupply() {
-        //...
-      }
-    }
+```javascript
+function Laser() {
+  var power_supply = new PowerSupply();
+
+  this.fire = function fire() {
+    power_supply.turn_on();
+    //...
+  }
+
+  function PowerSupply() {
+    //...
+  }
+}
+```
 
 ### Modular Behaviour
 
 Common behaviour can be bundled into modules:
 
-    function PoweredThing() {
-      this.set_voltage = function set_voltage() {
-        //...
-      }
-    }
-    
-    function Laser() {
-      PoweredThing.apply(this);
-    }
-    
-    var laser = new Laser();
-    laser.set_voltage(100000000);
+```javascript
+function PoweredThing() {
+  this.set_voltage = function set_voltage() {
+    //...
+  }
+}
+
+function Laser() {
+  PoweredThing.apply(this);
+}
+
+var laser = new Laser();
+laser.set_voltage(100000000);
+```
 
 ### Self
 
 Often, it's required to hold the constructed object in closure for use by 
 private functions. Use the variable name self for this:
 
-    function Laser() {
-      var self = this;
-    
-      function fire() {
-        set_voltage(self.voltage);
-      }
-    }
+```javascript
+function Laser() {
+  var self = this;
+
+  function fire() {
+    set_voltage(self.voltage);
+  }
+}
+```
 
 Note that this should always be the first line of the constructor.
 
@@ -251,11 +277,13 @@ from the function name.
 
 Bad:
 
-    function do_the_macarana(tempo, start_at_step, repeats) {
-      //...
-    }
-    
-    do_the_macarana(120, 5, 3);
+```javascript
+function do_the_macarana(tempo, start_at_step, repeats) {
+  //...
+}
+
+do_the_macarana(120, 5, 3);
+```
 
 Here, it's not obvious reading the function call what the parameters are 
 doing and anyone looking at the code would have to look up the function 
@@ -263,29 +291,33 @@ definition to understand the code.
 
 Good:
 
-    function do_the_macarana(params) {
-        //params: tempo, start_at_step, repeats
-      }
-    
-      do_the_macarana({
-        tempo:         120,
-        start_at_step: 5,
-        repeats:       3
-      });
+```javascript
+function do_the_macarana(params) {
+    //params: tempo, start_at_step, repeats
+  }
+
+  do_the_macarana({
+    tempo:         120,
+    start_at_step: 5,
+    repeats:       3
+  });
+```
 
 or
 
-    function do_the_macarana(params) {
-      var tempo =         params.tempo;
-      var start_at_step = params.start_at_step;
-      var repeats =       params.repeats;
-    }
-    
-    do_the_macarana({
-      tempo: 120,
-      start_at_step: 5,
-      repeats: 3
-    });
+```javascript
+function do_the_macarana(params) {
+  var tempo =         params.tempo;
+  var start_at_step = params.start_at_step;
+  var repeats =       params.repeats;
+}
+
+do_the_macarana({
+  tempo: 120,
+  start_at_step: 5,
+  repeats: 3
+});
+```
 
 Here, it's immediately apparent what the purpose of each parameter is when
 reading the function call.
@@ -309,7 +341,7 @@ Lib stuff (Utilities, any other non-vendor libraries which are not
 specific to a single part of the application) should be in the /lib 
 folder.
 
-application.js should only include code to initialize the application.
+`application.js` should only include code to initialize the application.
 
 ### Code in views
 
@@ -323,7 +355,9 @@ Of course, drop-in code like google analytics is also acceptable.
 
 Use of javascript in html attributes is bad:
 
-    <a onclick="do_something();">Do Something</a>;
+```html
+<a onclick="do_something();">Do Something</a>;
+```
 
 Make use of [unobtrusive javascript](http://en.wikipedia.org/wiki/Unobtrusive_JavaScript "Unobtrusive JavaScript on Wikipedia") in order to separate the functionality (the "behaviour layer") from a Web page's structure/content and presentation.
 
@@ -337,11 +371,15 @@ If you wish something to be declared on window, be explicit:
 
 wrong:
 
-    foo = 'bar';
+```javascript
+foo = 'bar';
+```
 
 right:
 
-    window.foo = 'bar';
+```javascript
+window.foo = 'bar';
+```
 
 ### Constants
 
@@ -361,24 +399,26 @@ hough they are not required.
 Semicolons should not be used after `for` / `while` / `switch` / `if` /
 `else` blocks and other similar constructions for readability.
 
-    var foo = 'bar';
-    // assignment - needs a semicolon.
-    
-    function foo() {
-      alert("don't you foo me");
-      //function call, needs a semicolon.
-    };
-    // Doesn't need a semicolon, but should have one.
-    
-    this.foo = function foo() {
-      alert("don't you foo me");
-    };
-    // This must have a semicolon as it is an assignment.
-    
-    if (foo) {
-      foo();
-    }
-    // Should not have a semicolon.
+```javascript
+var foo = 'bar';
+// assignment - needs a semicolon.
+
+function foo() {
+  alert("don't you foo me");
+  //function call, needs a semicolon.
+};
+// Doesn't need a semicolon, but should have one.
+
+this.foo = function foo() {
+  alert("don't you foo me");
+};
+// This must have a semicolon as it is an assignment.
+
+if (foo) {
+  foo();
+}
+// Should not have a semicolon.
+```
 
 ### Nested Functions
 
@@ -388,22 +428,26 @@ should in general be declared within that function.
 
 Bad:
 
-    function foo_plus_bar() {
-      return get_foo_for_foo_plus_bar() + 'bar';
-    };
-    function get_foo_for_foo_plus_bar() {
-      return 'foo';
-    };
+```javascript
+function foo_plus_bar() {
+  return get_foo_for_foo_plus_bar() + 'bar';
+};
+function get_foo_for_foo_plus_bar() {
+  return 'foo';
+};
+```
 
 Good:
 
-    function foo_plus_bar() {
-      function get_foo() {
-        return 'foo';
-      };
-    
-      return get_foo() + 'bar';
-    };
+```javascript
+function foo_plus_bar() {
+  function get_foo() {
+    return 'foo';
+  };
+
+  return get_foo() + 'bar';
+};
+```
 
 As an exception to this, sometimes you may have to declare a 'child' 
 function outside of the main function to avoid a circular reference (see 
@@ -418,48 +462,56 @@ statement list of a script or function.
 
 Terrible:
 
-    if (foo_is_wibble) {
-      function foo() { return 'wibble'; }
-    }
-    else {
-      function foo() { return 'bar'; }
-    }
-    foo();
+```javascript
+if (foo_is_wibble) {
+  function foo() { return 'wibble'; }
+}
+else {
+  function foo() { return 'bar'; }
+}
+foo();
+```
 
 Ok:
 
-    function wibble() {
-      return 'wibble';
-    }
-    function bar() {
-      return 'bar';
-    }
-    
-    var foo;
-    if (foo_is_wibble) {
-      foo = wibble;
-    }
-    else {
-      foo = bar;
-    }
-    foo();
+```javascript
+function wibble() {
+  return 'wibble';
+}
+function bar() {
+  return 'bar';
+}
+
+var foo;
+if (foo_is_wibble) {
+  foo = wibble;
+}
+else {
+  foo = bar;
+}
+foo();
+```
 
 In general, variables should also not be declared in blocks:
 
 bad:
 
-    for (var i=0; i<5 i++) {
-      var wibble = new Wibble(i);
-      wibbles.push(bar);
-    }
+```javascript
+for (var i=0; i<5 i++) {
+  var wibble = new Wibble(i);
+  wibbles.push(bar);
+}
+```
 
 good:
 
-    var wibble;
-    for (var i=0; i<5 i++) {
-      wibble = new Wibble(i);
-      wibbles.push(wibble);
-    }
+```javascript
+var wibble;
+for (var i=0; i<5 i++) {
+  wibble = new Wibble(i);
+  wibbles.push(wibble);
+}
+```
 
 ### Exceptions
 
@@ -475,21 +527,23 @@ code to fail silently.
 
 Do not use wrapper objects. Just declare the primitive directly:
 
-    var str = 'foo';
-    var bool = false;
-    var arr = [];
-    var num = 10;
-    var obj = {};
+```javascript
+var str = 'foo';
+var bool = false;
+var arr = [];
+var num = 10;
+var obj = {};
+```
 
 Especially, never use the new keyword with primitive constructors. Here's
 why:
 
-    typeof(Boolean()) //==> 'boolean'
-    typeof(new Boolean()) //==> 'object'
+```javascript
+typeof(Boolean()) // ==> 'boolean'
+typeof(new Boolean()) // ==> 'object'
+```
 
-There are only five primitive types in javascript, these are
-
-    undefined, null, boolean, number, and string
+There are only five primitive types in javascript, these are `undefined`, `null`, `boolean`, `number`, and `string`.
 
 ### Closures
 
@@ -499,21 +553,27 @@ long-running code.
 
 Consider this:
 
-    function foo(element, a, b) {
-      element.onclick = function handle_click() { /* uses a and b */ };
-    }
+```javascript
+function foo(element, a, b) {
+  element.onclick = function handle_click() { /* uses a and b */ };
+}
+```
 
 Here, we have created a circular reference which will cause a memory leak.
 The function `handle_click` holds `element` in scope, and `element` holds 
 `handle_click`, meaning that neither can be destroyed.
 
-    function foo(element, a, b) {
-      element.onclick = bar(a, b);
-    }
-    
-    function bar(a, b) {
-      return function() { /* uses a and b */ }
-    }
+```javascript
+function foo(element, a, b) {
+  element.onclick = bar(a, b);
+}
+```
+
+```javascript
+function bar(a, b) {
+  return function() { /* uses a and b */ }
+}
+```
 
 Here a second closure not containing element is created, thus avoiding the
 circular reference.
@@ -546,7 +606,9 @@ This method should not be used to iterate over an array.
 
 for example:
 
-    Array.prototype.find = function () {....} 
+```javascript
+Array.prototype.find = function () {....} 
+```
 
 Native wrapped constructors should never be modified. If you need to 
 extend the functionality of a native type, create a new constructor which
