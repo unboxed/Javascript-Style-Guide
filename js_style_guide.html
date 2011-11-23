@@ -29,9 +29,7 @@
       display: inline-block;
       padding: 0 5px;
     }
-    div.code {
-      display: block;
-      white-space: pre;
+    code {
       padding: 0 7px;
     }
     .good {
@@ -117,15 +115,15 @@
   <p>Avoid using anonymous functions. Note that a function assigned to an object attribute is anonymous unless explicitly given a name:</p>
 
   <p>bad:</p>
-  <div class="code bad">this.do_the_macarana = function () {
+  <pre class="bad"><code>this.do_the_macarana = function () {
   //...
-}</div>
+}</code></pre>
   <p>Although assigned to a meaningful attribute, this function itself is anonymous.</p>
 
   <p>good:</p>
-  <div class="code good">this.do_the_macarana = function do_the_macarana() {
+  <pre class="good"><code>this.do_the_macarana = function do_the_macarana() {
   //...
-}</div>
+}</code></pre>
 
   <p>
     An application made up of entirely anonymous functions is almost impossible to effectively profile, and stack traces end up being pretty meaningless.
@@ -155,62 +153,60 @@
 
   <p>Because of implicit semicolon insertion, always start your curly braces on the same line as whatever they're opening. For example:</p>
 
-  <div class="code good">if (something) {
+  <pre class="good"><code>if (something) {
   // ...
 }
 else {
   // ...
-}</div>
+}</code></pre>
 
   <h4>Array and Object Initializers</h4>
 
   <p>Single-line array and object initializers are allowed when they fit on a line:</p>
-  <div class="code good">var arr = [1, 2, 3];  // No space after [ or before ].
-var obj = {a: 1, b: 2, c: 3};  // No space after { or before }.</div>
+  <pre class="good"><code>var arr = [1, 2, 3];  // No space after [ or before ].
+var obj = {a: 1, b: 2, c: 3};  // No space after { or before }.</code></pre>
 
   <p>Multiline array initializers and object initializers are indented 2 spaces, just like blocks.</p>
-  <div class="code good">var inset = {
+  <pre class="good"><code>var inset = {
   top:    10,
   right:  20,
   bottom: 15,
   left:   12
-};</div>
+};</code></pre>
   <p>Note that values are aligned with no space between the key and the colon.</p>
 
-  <div class="code good">
-  this.rows_ = [
+  <pre class="good"><code>this.rows_ = [
     '"Slartibartfast" &lt;fjordmaster@magrathea.com&gt;',
     '"Zaphod Beeblebrox" &lt;theprez@universe.gov&gt;',
     '"Ford Prefect" &lt;ford@theguide.com&gt;',
     '"Arthur Dent" &lt;has.no.tea@gmail.com&gt;',
     '"Marvin the Paranoid Android" &lt;marv@googlemail.com&gt;',
     'the.mice@magrathea.com'
-  ];
-  </div>
+  ];</code></pre>
 
 
   <h4>Function Calls</h4>
 
   <p>Simple functions calls should all be on one line:</p>
 
-  <div class="code good">activate(the_laser, '100000V');</div>
+  <code class="good">activate(the_laser, '100000V');</code>
 
   <p>Function calls with extremely long arguments or lots of them should be split into 1 line per argument, starting on the second line:</p>
 
-  <div class="code good">activate(
+  <pre class="good"><code>activate(
   the_super_multi_laser_array,
   '100000000000000000000000000000000000000000V'
-);</div>
+);</code></pre>
 
   <p>Additionally, if the arguments contain an object (hashlike), it should always be written multiline:</p>
 
-  <div class="code good">activate(
+  <pre class="good"><code>activate(
   the_super_multi_laser_array,
   settings: {
     voltage: 100000000000000000000000000,
     target:  "John Prescot's bald spot"
   }
-);</div>
+);</code></pre>
 
   <h4>Indentation</h4>
 
@@ -221,17 +217,17 @@ var obj = {a: 1, b: 2, c: 3};  // No space after { or before }.</div>
 
   <p>There are several different ways of constructing objects.  In general the constructor pattern is recommended:</p>
 
-  <div class="code good">function Laser() {
+  <pre class="good"><code>function Laser() {
   this.fire = function fire() {
     //...
   }
 }
 
-window.the_laser = new Laser();</div>
+window.the_laser = new Laser();</code></pre>
 
   <p>Nested constructors are also fine but try to keep stuff separate where possible.</p>
 
-  <div class="code good">function Laser() {
+  <pre class="good"><code>function Laser() {
   var power_supply = new PowerSupply();
 
   this.fire = function fire() {
@@ -242,13 +238,13 @@ window.the_laser = new Laser();</div>
   function PowerSupply() {
     //...
   }
-}</div>
+}</code></pre>
 
   <h3>Modular Behavior</h3>
 
   <p>Common behaviour can be bundled into modules:</p>
 
-  <div class="code good">function PoweredThing() {
+  <pre class="good"><code>function PoweredThing() {
   this.set_voltage = function set_voltage() {
     //...
   }
@@ -259,20 +255,19 @@ function Laser() {
 }
 
 var laser = new Laser();
-
-laser.set_voltage(100000000);</div>
+laser.set_voltage(100000000);</code></pre>
 
   <h3>Self</h3>
 
   <p>Often, it's required to hold the constructed object in closure for use by private functions.  Use the variable name self for this:</p>
 
-  <div class="code good">function Laser() {
+  <pre class="good"><code>function Laser() {
   var self = this;
 
   function fire() {
     set_voltage(self.voltage);
   }
-}</div>
+}</code></pre>
 
   <p>Note that this should always be the first line of the constructor.</p>
 
@@ -283,15 +278,15 @@ laser.set_voltage(100000000);</div>
 
 
   <p>Bad:</p>
-  <div class="code bad">function do_the_macarana(tempo, start_at_step, repeats) {
+  <pre class="bad"><code>function do_the_macarana(tempo, start_at_step, repeats) {
   //...
 }
 
-do_the_macarana(120, 5, 3);</div>
+do_the_macarana(120, 5, 3);</code></pre>
   <p>Here, it's not obvious reading the function call what the parameters are doing and anyone looking at the code would have to look up the function definition to understand the code.</p>
 
   <p>Good:</p>
-  <div class="code good">function do_the_macarana(params) {
+  <pre class="good"><code>function do_the_macarana(params) {
     //params: tempo, start_at_step, repeats
   }
 
@@ -299,11 +294,11 @@ do_the_macarana(120, 5, 3);</div>
     tempo:         120,
     start_at_step: 5,
     repeats:       3
-  });</div>
+  });</code></pre>
 
   <p>or</p>
 
-  <div class="code good">function do_the_macarana(params) {
+  <pre class="good"><code>function do_the_macarana(params) {
   var tempo =         params.tempo;
   var start_at_step = params.start_at_step;
   var repeats =       params.repeats;
@@ -313,7 +308,7 @@ do_the_macarana({
   tempo: 120,
   start_at_step: 5,
   repeats: 3
-});</div>
+});</code></pre>
   <p>Here, it's immediately apparent what the purpose of each parameter is when reading the function call.</p>
   <p>Which parameters are consumed should be immediately visible at the start of the function definition.  When defining a function, either var all the members of params which you are interested in using, or leave a comment saying which params are being used.</p>
 
@@ -339,7 +334,7 @@ do_the_macarana({
   <p>Of course, drop-in code like google analytics is also acceptable.</p>
 
   <p>Use of javascript in html attributes is bad:</p>
-  <div class="code bad">&lt;a onclick="do_something();"&gt;Do Something&lt;/a&gt;</div>
+  <code class="bad">&lt;a onclick="do_something();"&gt;Do Something&lt;/a&gt;</code>
 
   <h2>Language rules</h2>
 
@@ -350,10 +345,10 @@ do_the_macarana({
   <p>If you wish something to be declared on window, be explicit:</p>
 
   <p>wrong:</p>
-  <div class="code bad">foo = 'bar';</div>
+  <code class="bad">foo = 'bar';</code>
 
   <p>right:</p>
-  <div class="code good">window.foo = 'bar';</div>
+  <code class="good">window.foo = 'bar';</code>
 
   <h3>Constants</h3>
 
@@ -368,7 +363,7 @@ do_the_macarana({
 
   <p>Semicolons should not be used after <span class="code">for</span> / <span class="code">while</span> / <span class="code">switch</span> / <span class="code">if</span> / <span class="code">else</span> blocks and other similar constructions for readability.</p>
 
-  <div class="code">var foo = 'bar';
+  <pre><code>var foo = 'bar';
 // assignment - needs a semicolon.
 
 function foo() {
@@ -385,7 +380,7 @@ this.foo = function foo() {
 if (foo) {
   foo();
 }
-// Should not have a semicolon.</div>
+// Should not have a semicolon.</code></pre>
 
 
   <h3>Nested Functions</h3>
@@ -393,21 +388,21 @@ if (foo) {
   <p>Nested functions are a great way to break up a function and can be used liberally.  If a function is used exclusively by another function, it should in general be declared within that function.</p>
 
   <p>Bad:</p>
-  <div class="code bad">function foo_plus_bar() {
+  <pre class="bad"><code>function foo_plus_bar() {
   return get_foo_for_foo_plus_bar() + 'bar';
 };
 function get_foo_for_foo_plus_bar() {
   return 'foo';
-};</div>
+};</code></pre>
 
   <p>Good:</p>
-  <div class="code good">function foo_plus_bar() {
+  <pre class="good"><code>function foo_plus_bar() {
   function get_foo() {
     return 'foo';
   };
 
   return get_foo() + 'bar';
-};</div>
+};</code></pre>
 
   <p>As an exception to this, sometimes you may have to declare a 'child' function outside of the main function to avoid a circular reference (see section on closures).</p>
 
@@ -418,16 +413,16 @@ function get_foo_for_foo_plus_bar() {
 
   <p class="Bad:">Terrible:</p>
 
-  <div class="code bad">if (foo_is_wibble) {
+  <pre class="bad"><code>if (foo_is_wibble) {
   function foo() { return 'wibble'; }
 }
 else {
   function foo() { return 'bar'; }
 }
-foo();</div>
+foo();</code></pre>
 
   <p>Ok:</p>
-  <div class="code good">function wibble() {
+  <pre class="good"><code>function wibble() {
   return 'wibble';
 }
 function bar() {
@@ -441,22 +436,22 @@ if (foo_is_wibble) {
 else {
   foo = bar;
 }
-foo();</div>
+foo();</code></pre>
 
   <p>In general, variables should also not be declared in blocks:</p>
 
   <p>bad:</p>
-  <div class="code bad">for (var i=0; i&lt;5 i++) {
+  <pre class="bad"><code>for (var i=0; i&lt;5 i++) {
   var wibble = new Wibble(i);
   wibbles.push(bar);
-}</div>
+}</code></pre>
 
   <p>good:</p>
-  <div class="code good">var wibble;
+  <pre class="good"><code>var wibble;
 for (var i=0; i&lt;5 i++) {
   wibble = new Wibble(i);
   wibbles.push(wibble);
-}</div>
+}</code></pre>
 
   <h3>Exceptions</h3>
 
@@ -469,17 +464,16 @@ for (var i=0; i&lt;5 i++) {
 
   <p>Do not use wrapper objects.  Just declare the primitive directly:</p>
 
-  <div class="code good">var str = 'foo';
+  <pre class="good"><code>var str = 'foo';
 var bool = false;
 var arr = [];
 var num = 10;
-var obj = {};</div>
+var obj = {};</code></pre>
 
   <p>Especially, never use the <span class="code">new</span> keyword with primitive constructors. Here's why:</p>
 
-  <div class="code">typeof(Boolean()) //==> 'boolean'
-
-typeof(new Boolean()) //==> 'object'</div>
+  <pre><code>typeof(Boolean()) //==> 'boolean'
+typeof(new Boolean()) //==> 'object'</code></pre>
 
   <p>There are only five primitive types in javascript, these are</p>
   <p class="code">undefined, null, boolean, number, and string</p>
@@ -491,19 +485,19 @@ typeof(new Boolean()) //==> 'object'</div>
 
   <p>Consider this:</p>
 
-  <div class="code">function foo(element, a, b) {
+  <pre><code>function foo(element, a, b) {
   element.onclick = function handle_click() { /* uses a and b */ };
-}</div>
+}</code></pre>
 
   <p>Here, we have created a circular reference which will cause a memory leak.  The function <span class="code">handle_click</span> holds <span class="code">element</span> in scope, and <span class="code">element</span> holds <span class="code">handle_click</span>, meaning that neither can be destroyed.</p>
 
-  <div class="code good">function foo(element, a, b) {
+  <pre class="good"><code>function foo(element, a, b) {
   element.onclick = bar(a, b);
 }
 
 function bar(a, b) {
   return function() { /* uses a and b */ }
-}</div>
+}</code></pre>
 
   <p>Here a second closure not containing <span class="code">element</span> is created, thus avoiding the circular reference.</p>
 
@@ -520,7 +514,7 @@ function bar(a, b) {
   <h3>This</h3>
 
   <p>Use of '<span class="code">this</span>' can be confusing.  In general it should be limited to being used within constructors and in conjunction with <span class="code">call</span> or <span class="code">apply</span>.</p>
-  <p>Using <span class="code">this</span> to target dom elements in event calls generally hints at a bad code structure, and consideration should be given to how to achieve the same results in a different way.</p>
+  <p>Using <span class="code">this</span> to target DOM elements in event calls generally hints at a bad code structure, and consideration should be given to how to achieve the same results in a different way.</p>
 
 
   <h3>For &hellip; in &hellip; loops</h3>
@@ -532,7 +526,7 @@ function bar(a, b) {
 
   <p>for example:</p>
 
-  <div class="code bad">Array.prototype.find = function () {....}</div>
+  <code class="bad">Array.prototype.find = function () {....}</code>
 
   <p>Native wrapped constructors should never be modified.  If you need to extend the functionality of a native type, create a new constructor which creates an object and then attaches any extended stuff to it.</p>
 </body>
