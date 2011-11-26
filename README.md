@@ -191,7 +191,7 @@ activate(
   the_super_multi_laser_array,
   settings: {
     voltage: 100000000000000000000000000,
-    target:  "John Prescot's bald spot"
+    target:  "John Prescott's bald spot"
   }
 );
 ```
